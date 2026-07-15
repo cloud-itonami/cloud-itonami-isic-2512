@@ -1,0 +1,37 @@
+{:itonami.blueprint/id "cloud-itonami-isic-2512"
+ :itonami.blueprint/name "Manufacture of tanks, reservoirs and containers of metal"
+ :itonami.blueprint/isic-rev5 "2512"
+ :itonami.blueprint/domain :metal-tank-reservoir-container/manufacturing
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:worker-safety :materials-safety :resource-efficiency]
+ :itonami.blueprint/governor :metal-tank-plant-operations-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger :cae]
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/implemented-slice
+ "MetalTankAdvisor ⊣ Metal Tank Plant Operations Governor,
+ langgraph-clj StateGraph, append-only audit ledger. A plant
+ OPERATIONS COORDINATION actor for a metal-tank/reservoir/container
+ fabrication shop (welding line -> pressure-testing line -> forming
+ line) producing tanks, reservoirs and containers of metal (storage
+ tanks, reservoirs, metal containers, gas cylinders, process vessels,
+ central-heating boilers) -- not direct welding-line-equipment control
+ authority, and NOT a pressure-vessel-certification authority (e.g. no
+ ASME code-stamp issuance). Four ops (`:log-production-batch` /
+ `:schedule-maintenance` / `:flag-safety-concern` /
+ `:coordinate-shipment`), all `:effect :propose` only. Eleven concrete
+ governor checks elaborate this blueprint's four HARD invariants:
+ propose-only effect, closed op allowlist, closed proposal-effect
+ allowlist (no direct welding-line-equipment control), permanent
+ welding-line-actuate block, permanent pressure-vessel-certification-
+ authority block (no ASME code-stamp issuance), independent equipment
+ verification/registration before maintenance scheduling, independent
+ batch verification/registration before shipment coordination,
+ independent shipment-weight recompute against the batch's own logged
+ weight, double-schedule guard, product-category validation, and
+ defect-rate plausibility validation. Safety-concern flagging
+ (weld-fume-exposure/pressure-test-rupture-risk/heavy-plate-crush-
+ hazard/confined-space-entry/hot-work-fire-risk) ALWAYS escalates to a
+ human shop supervisor; `:log-production-batch` is the only op eligible
+ to auto-commit, and only at phase 3 when governor-clean."}

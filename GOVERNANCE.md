@@ -1,0 +1,24 @@
+# Governance
+
+`cloud-itonami-isic-2512` is an OSS open-business blueprint for metal-tank/reservoir/container fabrication shop plant operations coordination.
+
+## Maintainers
+Maintainers may merge changes that preserve these invariants:
+- a welding-line or pressure-testing/forming-line action the governor refuses is never dispatched to hardware.
+- the Metal Tank Plant Operations Governor remains independent of the advisor.
+- hard policy violations (equipment-control bypass, welding-line actuation, pressure-vessel-certification-authority claims, record-suppression, unauthorized disclosure) cannot be overridden by human approval.
+- every schedule, sign-off, record and disclose path is auditable.
+- sensitive operating and personal data stays outside Git.
+
+## Decision Records
+Architecture decisions live in `docs/adr/`. Changes to the trust model, storage contract, public business model, operator certification or license should add or update an ADR.
+
+## Operator Governance
+Anyone may fork and operate independently. itonami.cloud certification is a separate trust mark and should require safety, audit and data-flow review.
+
+Certified operators can lose certification for:
+- bypassing welding-line/pressure-testing-line-control or record policy checks
+- claiming or attempting to exercise pressure-vessel-certification authority (e.g. an ASME code stamp) through this actor
+- mishandling sensitive data
+- misrepresenting certification status
+- failing to respond to security or safety incidents
