@@ -8,10 +8,17 @@
  ;; directly (not only under :dev) so a bare `clojure -M:test` works
  ;; offline inside the monorepo checkout without depending on
  ;; langgraph's own transitive git/sha pin being fetchable.
+ ;; jp-go-digital-design-system (デジタル庁デザインシステム) is this
+ ;; workspace's BASE design system -- used by the build-time HTML
+ ;; renderer below. Pinned by git coordinate rather than :local/root so
+ ;; a standalone fork can still regenerate the sample page.
  :deps {io.github.kotoba-lang/langgraph
         {:local/root "../../kotoba-lang/langgraph"}
         io.github.kotoba-lang/langchain
-        {:local/root "../../kotoba-lang/langchain"}}
+        {:local/root "../../kotoba-lang/langchain"}
+        io.github.kotoba-lang/jp-go-digital-design-system
+        {:git/url "https://github.com/kotoba-lang/jp-go-digital-design-system"
+         :git/sha "83db99546eabc53613ae826ea41d1533a3c574af"}}
  :aliases
  {;; offline workspace dev -- pin transitive langchain to local checkout
   ;; (kept for parity with sibling actors' deps.edn shape; redundant
@@ -21,6 +28,10 @@
          {:local/root "../../kotoba-lang/langchain"}}}
   ;; clojure -M:dev:run  -> drive the demo through one OperationActor
   :run {:main-opts ["-m" "metaltankmfg.sim"]}
+  ;; clojure -M:dev:render-html [out-file] -> regenerate
+  ;; docs/samples/operator-console.html by actually running the actor
+  ;; (flagship checklist item 2). Deterministic: reruns are byte-identical.
+  :render-html {:main-opts ["-m" "metaltankmfg.render-html"]}
   :test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
