@@ -1,5 +1,5 @@
 (ns metaltankmfg.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean metal-tank/
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean metal-tank/
   reservoir/container fabrication shop through intake -> maintenance
   scheduling (escalate/approve) -> safety-concern flag (escalate/
   approve) -> shipment coordination (escalate/approve), then shows
