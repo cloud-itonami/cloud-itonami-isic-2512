@@ -19,7 +19,7 @@
   real `phase/phases` map rather than described by hand.
 
   The scenario is adapted from this repo's own `metaltankmfg.sim` demo
-  driver (`clojure -M:dev:run`, run BEFORE writing this file and
+  driver (`kbb -M:dev:run`, run BEFORE writing this file and
   confirmed to produce a sensible ledger). MEASURED: unlike some
   sibling repos' sim drivers, this one's subject ids DO all exist in
   `store/sample-data!` (`batch-001`/`batch-002`/`batch-003`,
@@ -29,7 +29,7 @@
   DETERMINISTIC: no timestamp and no randomness reaches the page, so
   two consecutive runs are byte-identical (verify by diffing them).
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [clojure.java.io :as io]
             [kotoba.lang.text :as str]
@@ -327,7 +327,7 @@
      "    <h2>この実行の要約</h2>\n"
      "    <p class=\"muted\">このページは <code>metaltankmfg.render-html</code> が"
      " <code>metaltankmfg.operation</code> の langgraph StateGraph を実際に実行し"
-     "(<code>clojure -M:dev:render-html</code>)、その結果の SSoT と監査台帳だけを読んで生成しています。"
+     "(<code>kbb -M:dev:render-html</code>)、その結果の SSoT と監査台帳だけを読んで生成しています。"
      "数値・ID・保留理由はすべて実行結果であり、手書きの値はありません。</p>\n"
      "    <ul>\n"
      "      <li>監査台帳の事実: " (numv (count ledger)) " 件"
@@ -411,7 +411,7 @@
 
      "</main>\n"
      "<footer>\n"
-     "  <p class=\"muted\">Generated at build time by <code>clojure -M:dev:render-html</code>"
+     "  <p class=\"muted\">Generated at build time by <code>kbb -M:dev:render-html</code>"
      " — deterministic (no timestamp, no randomness); reruns are byte-identical.</p>\n"
      "</footer>\n"
      "</body></html>\n")))
